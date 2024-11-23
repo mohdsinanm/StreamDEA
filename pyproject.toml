@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "streamdea"
+version = "1.0.0"
+description = ""
+authors = ["mohdsinanm <mohamedysf@bicpu.edu.in>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+streamlit = "^1.40.1"
+pydeseq2 = "^0.4.12"
+polars = "^1.14.0"
+pandas = "^2.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
