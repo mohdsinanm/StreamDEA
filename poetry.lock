@@ -1854,6 +1854,20 @@ files = [
 ]
 
 [[package]]
+name = "st-theme"
+version = "1.2.3"
+description = "A component that returns the active theme of the Streamlit app."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "st-theme-1.2.3.tar.gz", hash = "sha256:ca97aece1a48ded6e83fd742c27cb0851e1bce2100ab4b6c37c7b6e003b65b42"},
+    {file = "st_theme-1.2.3-py3-none-any.whl", hash = "sha256:0a54d9817dd5f8a6d7b0d071b25ae72eacf536c63a5fb97374923938021b1389"},
+]
+
+[package.dependencies]
+streamlit = ">=1.33"
+
+[[package]]
 name = "statsmodels"
 version = "0.14.4"
 description = "Statistical computations and models for Python"
@@ -2143,4 +2157,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e64afb96ad5c067c1d1a3c56396c808fe7ff048c10416e7960cfbbe0c9e891aa"
+content-hash = "333f4c97f44d14ebabda1eae6a06ad5d5591014ee62440ed90706106efd5bae4"
