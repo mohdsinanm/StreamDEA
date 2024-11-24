@@ -6,7 +6,7 @@ import pandas as pd
 
 def plot_pca(dds,column_name):
     sc.tl.pca(dds)
-    return sc.pl.pca(dds, color = column_name, size = 200,save='.png')
+    return sc.pl.pca(dds, color = column_name, size = 200,return_fig=True)
 
 def heat(dds,sigs):
 

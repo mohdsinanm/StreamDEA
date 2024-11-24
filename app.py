@@ -93,10 +93,6 @@ def main():
     home, analyze, help, about= st.tabs(['Home',"Analyze","Help","About"])
 
     with home:
-        try:
-            st.write(os.listdir("figures"))
-        except:
-            pass
         home_main()
     
     with analyze:
