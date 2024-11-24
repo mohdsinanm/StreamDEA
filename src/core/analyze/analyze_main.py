@@ -3,9 +3,8 @@ import pandas as pd
 from src.core.analyze.deseq import *
 from src.utils.data_handling.pandas import *
 from src.core.analyze.plots import *
-import plotly.graph_objects as go
 import numpy as np
-import plotly
+from io import BytesIO
 
 
 def validate_experiment(count_df, meta):
@@ -94,8 +93,14 @@ def start_analysis():
             sigs = st.session_state['result'][(st.session_state['result'].padj < pval) & (abs(st.session_state['result'].log2FoldChange) > lfc)]
             plt = heat(st.session_state['dds'],sigs)
             st.pyplot(plt)
+            img_bytes = BytesIO()
+            plt.savefig(img_bytes, format='png')  # Close the figure to avoid display
+            img_bytes.seek(0)
+            st.download_button("Download Heatmap", data=img_bytes,file_name='Heatmap.png')
     except Exception as e:
         print(e)
+        pass
+
     try:
         st.dataframe(st.session_state['result'],use_container_width=True)
     except:
