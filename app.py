@@ -1,16 +1,83 @@
 import streamlit as st
 from src.utils.streamlit_utils.utils import *
 from src.core.analyze.analyze_main import start_analysis
+import os
 
+def help_main():
+    text = """
+    #### Input Data Requirements
 
+    This application requires two types of input files: **Count Data** and **Metadata**. Below are the details for how each file should be formatted.
+
+    ---
+
+    ##### 1. Count Data File
+    This file contains raw or normalized count data (e.g., gene expression, feature counts) in a tabular format.
+
+    ##### Structure
+    - **Rows**: Represent features (e.g., genes, transcripts, or other entities being counted).
+    - **Columns**: Represent samples or conditions.
+
+    ##### Content
+    - The first **column** should contain unique identifiers for the features (e.g., gene names or IDs).
+    - The first **row** should contain sample names (e.g., sample IDs or experimental conditions).
+    - Data cells should contain numerical values representing counts or measurements.
+
+    ##### Example
+    | Feature/Gene ID | Sample_1 | Sample_2 | Sample_3 |
+    |------------------|----------|----------|----------|
+    | Gene_1          | 100      | 120      | 130      |
+    | Gene_2          | 50       | 60       | 70       |
+    | Gene_3          | 300      | 290      | 310      |
+
+    ##### Notes
+    - Ensure there are **no missing values** in the count matrix.
+    - Avoid duplicate feature or sample identifiers.
+
+    ---
+
+    ##### 2. Metadata File
+    This file provides additional information about the samples in the count data. Metadata is essential for grouping and analyzing the data based on experimental conditions or other attributes.
+
+    ##### Supported Formats
+    - `.tsv`, `.csv`, `.parquet`, `.xlsx`
+
+    ##### Structure
+    - **Rows**: Represent individual samples.
+    - **Columns**: Represent sample attributes (e.g., condition, treatment, batch).
+
+    ##### Content
+    - The first **column** should contain sample names or IDs that **exactly match** the column names in the count data file (excluding the first feature ID column).
+    - The second column should contain **Group or condition** (e.g., control, treated)
+    - Additional columns can include:
+    - **Batch information** (Optional)
+    - **Time points** (Optional)
+    - Any other relevant experimental metadata.
+
+    ##### Example
+    | Sample ID | Condition | Batch  | Timepoint |
+    |-----------|-----------|--------|-----------|
+    | Sample_1  | Control   | Batch_1| 0h        |
+    | Sample_2  | Treated   | Batch_1| 6h        |
+    | Sample_3  | Treated   | Batch_2| 12h       |
+
+    ##### Notes
+    - Ensure **no missing values** in the metadata table.
+    - Ensure sample IDs in the metadata **exactly match** the column headers in the count data.
+
+    """
+    st.markdown(text)
+    
 def home_main():
     text = """
+            
             Our web platform enables you to perform Differential Expression Analysis (DEA) on RNA-Seq count data with ease.
             Using the powerful pyDESeq module, based on the DESeq2 method, you can quickly analyze gene expression differences between experimental conditions.
             Simply upload your count matrix and metadata, and the platform will automatically process your data, identify differentially expressed genes, and provide comprehensive results, including log-fold changes, p-values, and visualizations like volcano plots and heatmaps.
             Get started today to uncover the insights hidden in your RNA-Seq data!
             """
-    st.markdown("**Differential Expression Analysis (DEA) for RNA-Seq Data**")
+    
+    st.markdown("##### Differential Expression Analysis (DEA) for RNA-Seq Data")
     st.markdown(text)
 
 def main():
@@ -23,13 +90,20 @@ def main():
 
     render_text("StreamDEA", 35,-40,-1)
 
-    home, analyze, about = st.tabs(['Home',"Analyze","About",])
+    home, analyze, help, about= st.tabs(['Home',"Analyze","Help","About"])
 
     with home:
+        try:
+            st.write(os.listdir("figures"))
+        except:
+            pass
         home_main()
     
     with analyze:
         start_analysis()
+    
+    with help:
+        help_main()
 
 
 main()
