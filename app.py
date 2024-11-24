@@ -2,6 +2,40 @@ import streamlit as st
 from src.utils.streamlit_utils.utils import *
 from src.core.analyze.analyze_main import start_analysis
 import os
+from streamlit_theme import st_theme
+
+def about_main():
+    text = """
+    #### About
+
+    This project is designed to streamline RNA-seq data analysis by leveraging modern bioinformatics tools and interactive interfaces. The application provides an efficient and user-friendly solution for tasks such as differential expression analysis, data visualization, and functional enrichment.
+
+    ---
+
+    ##### Key Technologies Used
+
+    ##### 1. [PyDESeq2](https://pydeseq2.readthedocs.io/)
+    - PyDESeq2 is a Python library that implements the DESeq2 algorithm for differential gene expression analysis. 
+    - Built for bioinformaticians, it simplifies the process of working with count data, providing efficient and accurate results while maintaining compatibility with Python workflows.
+    - Version used: **v0.4.12**
+
+    ##### 2. [Streamlit](https://streamlit.io/)
+    - Streamlit is an open-source Python library for building data-driven web applications.
+    - It allows for the creation of interactive dashboards and visualization tools with minimal coding effort, enabling seamless integration of user input and real-time computation.
+    - Used to develop the application's graphical interface for improved usability.
+
+    ---
+
+    #### Author
+
+    - **Mohamed Sinan M**  
+    - Email: [mohamedysf@bicpu.edu.in](mailto:mohamedysf@bicpu.edu.in)  
+    - Contributed to the design, implementation, and documentation of this project.
+
+    ---
+    """ 
+
+    st.markdown(text)
 
 def help_main():
     text = """
@@ -79,7 +113,15 @@ def home_main():
     
     st.markdown("##### Differential Expression Analysis (DEA) for RNA-Seq Data")
     st.markdown(text)
-
+    try:
+        theme = st_theme(key='home')
+        if theme['base'] == 'dark':
+            st.image('src/assets/home_dark.jpg',use_container_width=True)
+        else:
+            st.image('src/assets/home.jpg',use_container_width=True)
+    except:
+        st.rerun()
+        pass
 def main():
     st.set_page_config(
     page_title="StreamDEA",
@@ -93,10 +135,6 @@ def main():
     home, analyze, help, about= st.tabs(['Home',"Analyze","Help","About"])
 
     with home:
-        try:
-            st.write(os.listdir("figures"))
-        except:
-            pass
         home_main()
     
     with analyze:
@@ -104,6 +142,9 @@ def main():
     
     with help:
         help_main()
+
+    with about:
+        about_main()
 
 
 main()

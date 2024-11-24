@@ -3,9 +3,8 @@ import pandas as pd
 from src.core.analyze.deseq import *
 from src.utils.data_handling.pandas import *
 from src.core.analyze.plots import *
-import plotly.graph_objects as go
 import numpy as np
-import plotly
+from io import BytesIO
 
 
 def validate_experiment(count_df, meta):
@@ -73,8 +72,8 @@ def start_analysis():
     try:
         
         fig = plot_pca(st.session_state['dds'],st.session_state['meta'].columns[0])
-        col_a, col_b, col_c = st.columns([1,4,1])
-        col_b.image("figures/pca.png",use_container_width=True)
+        col_a, col_b, col_c = st.columns([1,6,1])
+
        
 
         # plotly_fig = plotly.tools.mpl_to_plotly(fig)
@@ -85,7 +84,7 @@ def start_analysis():
         #     height=600,  # Set the desired height
         #     margin=dict(l=100, r=300, t=100, b=100)  # Adjust margins (left, right, top, bottom)
         # )
-        # st.plotly_chart(plotly_fig,use_container_width=False)
+        col_b.plotly_chart(fig,use_container_width=True)
 
         with st.expander("Heatmap"):
             col_a, col_b = st.columns([1,1])
@@ -94,8 +93,14 @@ def start_analysis():
             sigs = st.session_state['result'][(st.session_state['result'].padj < pval) & (abs(st.session_state['result'].log2FoldChange) > lfc)]
             plt = heat(st.session_state['dds'],sigs)
             st.pyplot(plt)
+            img_bytes = BytesIO()
+            plt.savefig(img_bytes, format='png')  # Close the figure to avoid display
+            img_bytes.seek(0)
+            st.download_button("Download Heatmap", data=img_bytes,file_name='Heatmap.png')
     except Exception as e:
         print(e)
+        pass
+
     try:
         st.dataframe(st.session_state['result'],use_container_width=True)
     except:
