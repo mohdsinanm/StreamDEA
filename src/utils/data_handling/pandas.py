@@ -1,6 +1,6 @@
 import pandas as pd
 
-def readfile(filepath:str, index_col:int=None, header:int = None) -> pd.DataFrame:
+def readdf(filepath:str, index_col:int=None, header:int = 0) -> pd.DataFrame:
 
     if filepath.endswith(".csv"):
         return pd.read_csv(filepath,index_col=index_col,header=header)
