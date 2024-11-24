@@ -120,7 +120,7 @@ def home_main():
         else:
             st.image('src/assets/home.jpg',use_container_width=True)
     except:
-        st.rerun()
+        print(1)
         pass
 def main():
     st.set_page_config(
