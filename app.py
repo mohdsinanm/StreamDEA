@@ -31,6 +31,7 @@ def about_main():
     - **Mohamed Sinan M**  
     - Email: [mohamedysf@bicpu.edu.in](mailto:mohamedysf@bicpu.edu.in)  
     - Contributed to the design, implementation, and documentation of this project.
+    - [Art](https://www.flaticon.com/free-icons/science)
 
     ---
     """ 
@@ -116,9 +117,9 @@ def home_main():
     try:
         theme = st_theme(key='home')
         if theme['base'] == 'dark':
-            st.image('src/assets/home_dark.jpg',use_container_width=True)
+            st.image('src/assets/home_dark.jpeg',use_container_width=True)
         else:
-            st.image('src/assets/home.jpg',use_container_width=True)
+            st.image('src/assets/home.jpeg',use_container_width=True)
     except:
         print(1)
         pass
