@@ -5,7 +5,8 @@
 Our web platform enables you to perform Differential Expression Analysis (DEA) on RNA-Seq count data with ease.
 Using the powerful pyDESeq module, based on the DESeq2 method, you can quickly analyze gene expression differences between experimental conditions.
 Simply upload your count matrix and metadata, and the platform will automatically process your data, identify differentially expressed genes, and provide comprehensive results, including log-fold changes, p-values, and visualizations like volcano plots and heatmaps.
-Get started today to uncover the insights hidden in your RNA-Seq data!
+Get started today to uncover the insights hidden in your RNA-Seq data! 
+You can access it from this [link](https://streamdea.streamlit.app/)
 
 ### Initializing the project
  - Create conda env with python version 3.12 and activate it ```conda create -n <env_name> python==3.12``` or install python 3.12 into your machine
