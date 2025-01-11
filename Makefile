@@ -10,9 +10,9 @@ VENV = venv  # Virtual environment directory
 # all: install run
 
 # Install dependencies
-# install:
-# 	@echo "Installing dependencies..."
-# 	@poetry install
+install:
+	@echo "Installing dependencies..."
+	@poetry install --no-root
 
 # Run the Streamlit app
 run:
